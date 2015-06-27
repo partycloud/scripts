@@ -1,0 +1,9 @@
+#!/bin/bash
+set -eo pipefail
+
+if [[ $# -ne 2 ]]; then
+  echo "Usage : $0 volume instance"
+  exit -1
+fi
+
+aws ec2 attach-volume --device /dev/sdf --volume-id $1 --instance-id $2 | jq '.'

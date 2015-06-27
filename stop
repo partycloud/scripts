@@ -1,0 +1,5 @@
+instance_id=$(aws ec2 describe-instances --filter "Name=instance-state-name,Values=running" | jq '.Reservations[0].Instances[0].InstanceId' -r)
+
+echo "Stopping $instance_id"
+
+aws ec2 terminate-instances --instance-ids $instance_id

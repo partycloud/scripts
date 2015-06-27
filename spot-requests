@@ -1,0 +1,5 @@
+#!/bin/bash
+set -eo pipefail
+
+aws ec2 describe-spot-instance-requests \
+  | jq --compact-output '.SpotInstanceRequests[] | { status: .Status.Code }'

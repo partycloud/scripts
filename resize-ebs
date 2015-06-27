@@ -1,0 +1,12 @@
+export MF_INSTANCE_ID=i-df82091d
+export MF_VOLUME_ID=vol-f99dc6e4
+
+aws ec2 create-snapshot --volume-id $MF_VOLUME_ID
+aws ec2 describe-snapshots --filter "Name=volume-id,Values=$MF_VOLUME_ID"
+
+export MF_SNAP_ID=snap-a276d39a
+aws ec2 create-volume --size 10 --volume-type gp2 --availability-zone us-west-1a --snapshot-id $MF_SNAP_ID
+
+export MF_VOLUME_ID=vol-bf1ddb46
+aws ec2 attach-volume --device /dev/sdf --volume-id $MF_VOLUME_ID --instance-id $MF_INSTANCE_ID
+sudo resize2fs /dev/xvdf

@@ -1,0 +1,6 @@
+#!/bin/bash
+set -eo pipefail
+
+aws ec2 describe-instances \
+  --filter "Name=instance-state-name,Values=running" | \
+  jq --compact-output '.Reservations[].Instances[] | {id: .InstanceId, ip: .PublicIpAddress}'

@@ -1,0 +1,13 @@
+#!/bin/bash
+set -eo pipefail
+
+if [[ $# -ne 1 ]]; then
+  echo "Usage : $0 addr"
+  exit -1
+fi
+
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@$1 << EOF
+sudo mkdir /mnt/data
+sudo mount /dev/xvdf /mnt/data
+df -l
+EOF
