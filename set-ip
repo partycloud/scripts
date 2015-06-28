@@ -1,0 +1,9 @@
+#!/bin/bash
+set -eo pipefail
+
+if [[ $# -ne 2 ]]; then
+  echo "Usage : $0 ip instance"
+  exit -1
+fi
+
+aws ec2 associate-address --public-ip $1 --instance-id $2 | jq '.'

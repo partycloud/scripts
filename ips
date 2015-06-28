@@ -1,0 +1,5 @@
+#!/bin/bash
+set -eo pipefail
+
+aws ec2 describe-addresses | \
+  jq --compact-output '.Addresses[] | {ip: .PublicIp, instance: .InstanceId}'

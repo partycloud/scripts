@@ -27,7 +27,8 @@ aws ec2 describe-security-groups
 ## IP
 ```
 aws ec2 allocate-address
-aws ec2 associate-address --instance-id $INSTANCE_ID --public-ip $IP
+./ips
+./set-ip $IP $INSTANCE
 ```
 
 ## Create new volume
@@ -60,7 +61,9 @@ aws ec2 describe-snapshots --filter "Name=volume-id,Values=$MF_VOLUME_ID"
 ```
 
 ## Clean up
+```
 aws ec2 terminate-instances --instance-ids $MF_INSTANCE_ID
+```
 
 ## Upgrading
 ```
