@@ -1,0 +1,10 @@
+#!/bin/bash
+set -eo pipefail
+
+if [[ $# -ne 1 ]]; then
+  echo "Usage : $0 volume"
+  exit -1
+fi
+
+aws ec2 create-snapshot --volume-id $1 \
+  | jq '.'

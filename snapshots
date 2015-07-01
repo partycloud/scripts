@@ -1,0 +1,10 @@
+#!/bin/bash
+set -eo pipefail
+
+if [[ $# -ne 1 ]]; then
+  echo "Usage : $0 volume"
+  exit -1
+fi
+
+aws ec2 describe-snapshots --filter "Name=volume-id,Values=$1" \
+  | jq --compact-output '.Snapshots[] | { state: .State, at: .StartTime, progress: .Progress }'
