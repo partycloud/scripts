@@ -9,8 +9,7 @@ fi
 function main() {
   local addr="$1"; shift
   echo "logs $addr $@"
-  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@$addr \
-    docker logs $@ minecraft
+  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@$addr $@
 }
 
 main $@
