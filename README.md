@@ -67,9 +67,15 @@ aws ec2 terminate-instances --instance-ids $MF_INSTANCE_ID
 
 ## Upgrading
 ```
-docker run -it --rm -v /mnt/data:/data --entrypoint /bin/bash partycloud/minecraft:ftb-infinity
+docker stop minecraft
+docker run -it --rm -v /mnt/data:/data --entrypoint /bin/sh partycloud/minecraft:ftb-infinity
 mv mods old_mods
 cp -R /srv/mods mods
 # Ctrl^D
 docker start -i minecraft
+```
+
+## Price info
+```
+aws ec2 create-spot-datafeed-subscription --bucket $BUCKET
 ```
